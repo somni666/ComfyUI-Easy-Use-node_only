@@ -1,4 +1,4 @@
-import re, time, os, psutil
+import re, os, psutil
 import folder_paths
 import comfy.utils
 import comfy.sd
@@ -174,11 +174,8 @@ class easyLoader:
             self.clear_unused_objects(desired_names, object_type)
 
     def add_to_cache(self, obj_type, key, value):
-        """
-        Add an item to the cache with the current timestamp.
-        """
-        timestamped_value = (value, time.time())
-        self.loaded_objects[obj_type][key] = timestamped_value
+        """Do not retain model objects outside ComfyUI's own managed cache."""
+        return
 
     def determine_memory_threshold(self, percentage=0.8):
         """
