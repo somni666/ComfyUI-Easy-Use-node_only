@@ -983,8 +983,6 @@ NODE_CLASS_MAPPINGS = {
     "easy preSamplingSdTurbo": sdTurboSettings,
     "easy preSamplingDynamicCFG": dynamicCFGSettings,
     "easy preSamplingCascade": cascadeSettings,
-    "easy preSamplingLayerDiffusion": layerDiffusionSettings,
-    "easy preSamplingLayerDiffusionADDTL": layerDiffusionSettingsADDTL,
     "dynamicThresholdingFull": dynamicThresholdingFull,
 }
 
@@ -996,7 +994,5 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "easy preSamplingSdTurbo": "PreSampling (SDTurbo)",
     "easy preSamplingDynamicCFG": "PreSampling (DynamicCFG)",
     "easy preSamplingCascade": "PreSampling (Cascade)",
-    "easy preSamplingLayerDiffusion": "PreSampling (LayerDiffuse)",
-    "easy preSamplingLayerDiffusionADDTL": "PreSampling (LayerDiffuse ADDTL)",
     "dynamicThresholdingFull": "DynamicThresholdingFull",
 }
