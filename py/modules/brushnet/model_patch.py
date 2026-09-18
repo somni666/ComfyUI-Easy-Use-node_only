@@ -13,6 +13,11 @@ def add_model_patch_option(model):
 
 # Patch model with model_function_wrapper
 def patch_model_function_wrapper(model, forward_patch, remove=False):
+    raise RuntimeError(
+        "Bundled BrushNet/PowerPaint support is disabled because it requires "
+        "persistent process-wide patches to ComfyUI sampling functions."
+    )
+
     def brushnet_model_function_wrapper(apply_model_method, options_dict):
         to = options_dict['c']['transformer_options']
 
@@ -77,17 +82,6 @@ def patch_model_function_wrapper(model, forward_patch, remove=False):
     mp['unet'] = model.model.diffusion_model
     mp['step'] = 0
     mp['total_steps'] = 1
-
-    # apply patches to code
-    if comfy.samplers.sample.__doc__ is None or 'BrushNet' not in comfy.samplers.sample.__doc__:
-        comfy.samplers.original_sample = comfy.samplers.sample
-        comfy.samplers.sample = modified_sample
-
-    if comfy.ldm.modules.diffusionmodules.openaimodel.apply_control.__doc__ is None or \
-            'BrushNet' not in comfy.ldm.modules.diffusionmodules.openaimodel.apply_control.__doc__:
-        comfy.ldm.modules.diffusionmodules.openaimodel.original_apply_control = comfy.ldm.modules.diffusionmodules.openaimodel.apply_control
-        comfy.ldm.modules.diffusionmodules.openaimodel.apply_control = modified_apply_control
-
 
 # Model needs current step number and cfg at inference step. It is possible to write a custom KSampler but I'd like to use ComfyUI's one.
 # The first versions had modified_common_ksampler, but it broke custom KSampler nodes

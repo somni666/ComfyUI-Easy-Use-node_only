@@ -55,20 +55,17 @@ class LayerDiffuse:
         return (write_c_concat(cond), write_c_concat(uncond))
 
     def apply_layer_diffusion(self, model, method, weight, samples, blend_samples, positive, negative, image=None, additional_cond=(None, None, None)):
+        raise RuntimeError(
+            "LayerDiffuse support is disabled because it requires a persistent "
+            "process-wide patch to ComfyUI's weight calculation."
+        )
+
         control_img: Optional[torch.TensorType] = None
         sd_version = get_sd_version(model)
         model_url = LAYER_DIFFUSION[method.value][sd_version]["model_url"]
 
         if image is not None:
             image = image.movedim(-1, 1)
-
-        try:
-            if hasattr(comfy.lora, "calculate_weight"):
-                comfy.lora.calculate_weight = calculate_weight_adjust_channel(comfy.lora.calculate_weight)
-            else:
-                ModelPatcher.calculate_weight = calculate_weight_adjust_channel(ModelPatcher.calculate_weight)
-        except:
-            pass
 
         if method in [LayerMethod.FG_ONLY_CONV, LayerMethod.FG_ONLY_ATTN] and sd_version == 'sd1':
             self.frames = 1

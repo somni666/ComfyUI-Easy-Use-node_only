@@ -174,7 +174,7 @@ class applyInpaint:
                 "pipe": ("PIPE_LINE",),
                 "image": ("IMAGE",),
                 "mask": ("MASK",),
-                "inpaint_mode": (('normal', 'fooocus_inpaint', 'brushnet_random', 'brushnet_segmentation', 'powerpaint'),),
+                "inpaint_mode": (('normal', 'fooocus_inpaint'),),
                 "encode": (('none', 'vae_encode_inpaint', 'inpaint_model_conditioning', 'different_diffusion'), {"default": "none"}),
                 "grow_mask_by": ("INT", {"default": 6, "min": 0, "max": 64, "step": 1}),
                 "dtype": (['float16', 'bfloat16', 'float32', 'float64'],),
@@ -343,14 +343,10 @@ class applyInpaint:
 
 NODE_CLASS_MAPPINGS = {
     "easy applyFooocusInpaint": applyFooocusInpaint,
-    "easy applyBrushNet": applyBrushNet,
-    "easy applyPowerPaint": applyPowerPaint,
     "easy applyInpaint": applyInpaint
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "easy applyFooocusInpaint": "Easy Apply Fooocus Inpaint",
-    "easy applyBrushNet": "Easy Apply BrushNet",
-    "easy applyPowerPaint": "Easy Apply PowerPaint",
     "easy applyInpaint": "Easy Apply Inpaint"
 }
